@@ -1,0 +1,38 @@
+name: mern-app
+
+services:
+  api:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: ./backend/.env
+    volumes:
+      #mapping backend from localhost to container app directory.
+      - ./backend:/app
+      #node modules will not be changed and the container will use the ones already exists.
+      - /app/node_modules 
+    networks:
+      - mern-app
+    ports:
+      - 5000:5000
+  
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    networks:
+      - mern-app
+    ports:
+      - 3000:3000
+    depends_on:
+      - api
+      
+
+networks:
+  mern-app:
+    driver: bridge
