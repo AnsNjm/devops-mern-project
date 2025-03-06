@@ -1,0 +1,9 @@
+all:
+  children:
+    client:
+      hosts:
+        mern_app:
+          ansible_host: localhost
+          ansible_ssh_user: anassnajam                                             
+          # ansible_ssh_private_key_file: ~/.ssh/id_rsa   Remplacez par le chemin vers votre clé privée SSH
+          # ansible_python_interpreter: /usr/bin/python3

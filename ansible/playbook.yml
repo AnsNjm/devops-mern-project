@@ -1,0 +1,26 @@
+- name: Deploy MERN App
+  hosts: localhost
+  become: yes
+  tasks:
+  # 1ere fois manuelle
+    # - name: Install required packages
+    #   apt:
+    #     name:
+    #       - docker.io
+    #       - docker-compose
+    #     state: present
+    #     update_cache: yes
+
+    # - name: Copy Docker Compose file
+    #   copy:
+    #     src: ../.docker-compose.yml
+    #     dest: /home/ubuntu/.docker-compose.yml
+
+    - name: Start application using Docker Compose
+      shell: |
+        cd /home/anassnajam/devops-project/mern-student-management-app/ &&
+        docker-compose down && 
+        docker-compose up --build -d
+  # git pull https.... entre cd et down
+        
+      
